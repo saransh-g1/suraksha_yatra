@@ -5,5 +5,4 @@ function page() {
     <Heatmap/>
   )
 }
-
 export default page
