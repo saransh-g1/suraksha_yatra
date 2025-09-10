@@ -1,23 +1,85 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  const items = [
+    { href: "/", label: "Home", icon: HomeIcon },
+    { href: "/network", label: "My Network", icon: UsersIcon },
+    { href: "/post", label: "Post", icon: PlusSquareIcon },
+    { href: "/notifications", label: "Notifications", icon: BellIcon },
+    { href: "/jobs", label: "Jobs", icon: BriefcaseIcon },
+  ];
+
   return (
-    <footer className="border-t bg-white">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 text-sm gap-3">
-          <span className="text-gray-600">© {new Date().getFullYear()} Suraksha Yatra</span>
-          <div className="grid grid-cols-2 sm:flex gap-2">
-            <Link href="/aadhar-upload" className="rounded-md border border-orange-500 text-orange-600 px-3 py-1 hover:bg-orange-50">Aadhar upload</Link>
-            <Link href="/settings" className="rounded-md border border-orange-500 text-orange-600 px-3 py-1 hover:bg-orange-50">Settings</Link>
-            <Link href="/" className="rounded-md bg-orange-600 text-white px-3 py-1 hover:bg-orange-700">Home</Link>
-            <Link href="/support" className="rounded-md border border-orange-500 text-orange-600 px-3 py-1 hover:bg-orange-50">Support</Link>
-            <Link href="/profile" className="rounded-md border border-orange-500 text-orange-600 px-3 py-1 hover:bg-orange-50">Profile</Link>
-          </div>
-        </div>
-      </div>
+    <footer className="bg-white border-t md:relative fixed bottom-0 left-0 right-0 z-50 shadow-[0_-1px_6px_0_rgba(0,0,0,0.06)]">
+      <nav className="mx-auto max-w-6xl">
+        <ul className="grid grid-cols-5">
+          {items.map(({ href, label, icon: Icon }) => {
+            const active = pathname === href;
+            return (
+              <li key={href} className="text-center">
+                <Link
+                  href={href}
+                  className={`flex flex-col items-center justify-center gap-1 py-2 text-[11px] sm:text-xs ${
+                    active ? "text-orange-600" : "text-gray-500"
+                  }`}
+                  aria-current={active ? "page" : undefined}
+                >
+                  <Icon className={`h-5 w-5 ${active ? "fill-orange-600" : "fill-gray-500"}`} />
+                  <span className="leading-none">{label}</span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
     </footer>
+  );
+}
+
+type IconProps = { className?: string };
+
+function HomeIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 3 3 10v10a1 1 0 0 0 1 1h5v-6h6v6h5a1 1 0 0 0 1-1V10l-9-7z" />
+    </svg>
+  );
+}
+
+function UsersIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm-8 2a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm8 2c-3.67 0-8 1.84-8 5v2h16v-2c0-3.16-4.33-5-8-5Zm-8 1c-2.76 0-6 1.38-6 3.75V20h6Z" />
+    </svg>
+  );
+}
+
+function PlusSquareIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} xmlns="http://www.w3.org/2000/svg">
+      <path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm7 4h-2v4H6v2h4v4h2v-4h4v-2h-4Z" />
+    </svg>
+  );
+}
+
+function BellIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 22a2.5 2.5 0 0 0 2.45-2h-4.9A2.5 2.5 0 0 0 12 22ZM20 17h-1V11a7 7 0 1 0-14 0v6H4v2h16Z" />
+    </svg>
+  );
+}
+
+function BriefcaseIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} xmlns="http://www.w3.org/2000/svg">
+      <path d="M9 4h6a2 2 0 0 1 2 2v2h3a1 1 0 0 1 1 1v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9a1 1 0 0 1 1-1h3V6a2 2 0 0 1 2-2Zm0 4h6V6H9Zm-4 5v6h14v-6H5Zm6-1h2v2h-2Z" />
+    </svg>
   );
 }
 

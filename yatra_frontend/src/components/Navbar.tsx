@@ -7,7 +7,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="border-b bg-white sticky top-0 z-50">
+    <header className="border-b border-orange-200 bg-white sticky top-0 z-50 shadow-sm">
       <nav className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-14 items-center justify-between">
           <Link href="/" className="font-semibold text-orange-600">Suraksha Yatra</Link>
@@ -37,7 +37,7 @@ export default function Navbar() {
           </button>
         </div>
         {open && (
-          <div className="md:hidden border-t py-2 text-sm">
+          <div className="md:hidden border-t py-2 text-sm bg-white shadow-sm">
             <Link href="/" className="block px-2 py-2">Home</Link>
             <details>
               <summary className="px-2 py-2 cursor-pointer">Services</summary>
