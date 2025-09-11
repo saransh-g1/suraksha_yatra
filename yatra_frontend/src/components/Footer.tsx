@@ -9,15 +9,13 @@ export default function Footer() {
   const items = [
     { href: "/", label: "Home", icon: HomeIcon },
     { href: "/network", label: "My Network", icon: UsersIcon },
-    { href: "/post", label: "Post", icon: PlusSquareIcon },
-    { href: "/notifications", label: "Notifications", icon: BellIcon },
-    { href: "/jobs", label: "Jobs", icon: BriefcaseIcon },
+    { href: "/notifications", label: "Notifications", icon: BellIcon }
   ];
 
   return (
     <footer className="bg-white border-t md:relative fixed bottom-0 left-0 right-0 z-50 shadow-[0_-1px_6px_0_rgba(0,0,0,0.06)]">
       <nav className="mx-auto max-w-6xl">
-        <ul className="grid grid-cols-5">
+        <ul className="grid grid-cols-3">
           {items.map(({ href, label, icon: Icon }) => {
             const active = pathname === href;
             return (
@@ -59,26 +57,10 @@ function UsersIcon({ className }: IconProps) {
   );
 }
 
-function PlusSquareIcon({ className }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} xmlns="http://www.w3.org/2000/svg">
-      <path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm7 4h-2v4H6v2h4v4h2v-4h4v-2h-4Z" />
-    </svg>
-  );
-}
-
 function BellIcon({ className }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" className={className} xmlns="http://www.w3.org/2000/svg">
       <path d="M12 22a2.5 2.5 0 0 0 2.45-2h-4.9A2.5 2.5 0 0 0 12 22ZM20 17h-1V11a7 7 0 1 0-14 0v6H4v2h16Z" />
-    </svg>
-  );
-}
-
-function BriefcaseIcon({ className }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} xmlns="http://www.w3.org/2000/svg">
-      <path d="M9 4h6a2 2 0 0 1 2 2v2h3a1 1 0 0 1 1 1v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9a1 1 0 0 1 1-1h3V6a2 2 0 0 1 2-2Zm0 4h6V6H9Zm-4 5v6h14v-6H5Zm6-1h2v2h-2Z" />
     </svg>
   );
 }

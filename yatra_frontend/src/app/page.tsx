@@ -21,6 +21,7 @@ export default function Home() {
               <div className="mt-6 flex gap-3">
                 <Link href="#plan" className="px-5 py-2.5 rounded-md bg-white text-orange-600 hover:bg-orange-50 text-sm sm:text-base">Plan your trip</Link>
                 <Link href="/map" className="px-5 py-2.5 rounded-md ring-1 ring-white/80 text-white hover:bg-white/10 text-sm sm:text-base">Explore map</Link>
+                <Link href="/chat" className="px-5 py-2.5 rounded-md bg-black/20 text-white hover:bg-black/30 text-sm sm:text-base">Chat</Link>
               </div>
             </div>
           </div>
