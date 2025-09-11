@@ -2,10 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 
-// TypeScript declaration for Google Maps
+// TypeScript declaration for Google Maps (optional to avoid duplicate modifier errors)
 declare global {
   interface Window {
-    google: any;
+    google?: any;
   }
 }
 
@@ -39,26 +39,30 @@ const Heatmap = () => {
   useEffect(() => {
     const loadGoogleMaps = async () => {
       try {
-        // Check if Google Maps is already loaded
         if (window.google && window.google.maps) {
           initializeMap();
           return;
         }
-
-        // Load Google Maps script with Visualization library
+        // Defer to the shared loader if present
+        const existing = document.querySelector('script[data-google-maps="true"]') as HTMLScriptElement | null;
+        if (existing) {
+          existing.addEventListener("load", () => initializeMap(), { once: true });
+          existing.addEventListener("error", () => setError("Failed to load Google Maps. Please check your API key."), { once: true });
+          return;
+        }
+        // As a last resort, inject once
+        const key = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+        if (!key) {
+          setError("NEXT_PUBLIC_GOOGLE_MAPS_API_KEY is missing");
+          return;
+        }
         const script = document.createElement("script");
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=visualization`;
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=visualization`;
         script.async = true;
         script.defer = true;
-
-        script.onload = () => {
-          initializeMap();
-        };
-
-        script.onerror = () => {
-          setError("Failed to load Google Maps. Please check your API key.");
-        };
-
+        script.setAttribute("data-google-maps", "true");
+        script.onload = () => initializeMap();
+        script.onerror = () => setError("Failed to load Google Maps. Please check your API key.");
         document.head.appendChild(script);
       } catch (err: any) {
         setError("Error loading Google Maps: " + err.message);
@@ -115,11 +119,8 @@ const Heatmap = () => {
 
     loadGoogleMaps();
 
-    // Cleanup function
-    return () => {
-      const scripts = document.querySelectorAll('script[src*="maps.googleapis.com"]');
-      scripts.forEach(script => script.remove());
-    };
+    // Cleanup function - do not remove global script
+    return () => {};
   }, []);
 
   if (error) {
