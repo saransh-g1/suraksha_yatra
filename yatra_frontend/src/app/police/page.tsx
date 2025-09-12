@@ -30,13 +30,13 @@ export default function PoliceDashboardPage() {
       <section className="bg-gradient-to-br from-orange-600 to-orange-500 text-white">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <h1 className="text-2xl sm:text-3xl font-bold">Police Dashboard</h1>
-          <p className="text-white/90 text-sm mt-1">Live field alerts and regional heatmap.</p>
+          <p className="text-white/90 text-sm sm:text-base mt-1">Live field alerts and regional heatmap.</p>
         </div>
       </section>
 
       {/* Content: mobile stacked 50/50, desktop split */}
-      <section className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-        <div className="grid grid-rows-[45vh_45vh] md:grid-rows-1 md:grid-cols-3 gap-4">
+      <section className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-4 sm:py-6 pb-24 sm:pb-6">
+        <div className="grid grid-rows-[50vh_50vh] md:grid-rows-1 md:grid-cols-3 gap-4">
           {/* Map + Heatmap */}
           <div className="relative md:col-span-2 rounded-xl border border-orange-200 overflow-hidden bg-white">
             <div className="flex items-center justify-between px-3 py-2 border-b">
@@ -69,12 +69,12 @@ export default function PoliceDashboardPage() {
           </div>
 
           {/* Alerts list */}
-          <div className="rounded-xl border border-orange-200 overflow-hidden bg-white flex flex-col">
+          <div className="rounded-xl border border-orange-200 overflow-hidden bg-white flex flex-col min-h-0">
             <div className="px-3 py-2 border-b flex items-center justify-between">
-              <h2 className="font-medium text-gray-900">Recent alerts</h2>
+              <h2 className="font-medium text-gray-900 text-sm sm:text-base">Recent alerts</h2>
               <button className="text-orange-600 text-sm hover:underline">View all</button>
             </div>
-            <ul className="divide-y overflow-y-auto" style={{ maxHeight: "100%" }}>
+            <ul className="divide-y overflow-y-auto flex-1 min-h-0">
               {alerts.map((a) => (
                 <li key={a.id} className="px-3 py-3 flex items-start gap-3">
                   <SeverityPill level={a.severity} />

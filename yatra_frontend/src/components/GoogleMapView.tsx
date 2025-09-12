@@ -27,9 +27,10 @@ export default function GoogleMapView({ center = { lat: 28.6139, lng: 77.209 }, 
   useEffect(() => {
     if (!loaded || !mapRef.current) return;
     if (!mapInstance.current) {
+      const isSmall = window.matchMedia("(max-width: 640px)").matches;
       mapInstance.current = new window.google.maps.Map(mapRef.current, {
         center,
-        zoom,
+        zoom: isSmall ? Math.max(zoom - 1, 3) : zoom,
         mapTypeControl: false,
         streetViewControl: false,
         fullscreenControl: false,

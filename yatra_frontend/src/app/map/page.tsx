@@ -12,9 +12,9 @@ export default function MapPage() {
   ] as const;
 
   return (
-    <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8 bg-white">
+    <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-6 sm:py-8 bg-white pb-24 sm:pb-8">
       <h1 className="text-2xl font-semibold mb-4 text-orange-600">Live Map</h1>
-      <div className="h-[60vh] border border-orange-200 rounded-xl overflow-hidden">
+      <div className="h-[55vh] sm:h-[60vh] lg:h-[70vh] border border-orange-200 rounded-xl overflow-hidden">
         <GoogleMapView center={{ lat: 28.6139, lng: 77.2090 }} zoom={10} zones={zones as any} showHeatmap />
       </div>
     </div>
