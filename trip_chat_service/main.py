@@ -67,7 +67,7 @@ class State:
         self.data: Optional[Dict[str, Any]] = None
 
 # Initialize LLM globally
-api_key = "AIzaSyA6dztsWraHuXGzzzg_vvk-ohaI7L8XaL0"
+api_key = os.getenv("GOOGLE_API_KEY", "")
 if not api_key:
     raise ValueError("GOOGLE_API_KEY environment variable is required")
 

@@ -62,3 +62,16 @@ The service allows requests from:
 - http://127.0.0.1:3000
 
 Modify the CORS settings in `main.py` if you need different origins.
+
+## Docker (Railway)
+
+Build and run locally:
+```bash
+cd trip_chat_service
+docker build -t trip_chat_service .
+docker run -p 8000:8000 --env PORT=8000 --env GOOGLE_API_KEY=YOUR_KEY trip_chat_service
+```
+
+On Railway, set environment variables:
+- GOOGLE_API_KEY: your Google Generative AI key
+- PORT: 8000 (Railway sets this automatically; the image respects it)
